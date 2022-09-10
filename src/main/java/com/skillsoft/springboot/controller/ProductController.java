@@ -24,9 +24,11 @@ public class ProductController {
 
     @PostMapping("/products")
     public void addProduct(@RequestBody Product product) {
-        System.out.println(product.getId());
-        System.out.println(product.getName());
-        System.out.println(product.getCategory());
         productService.addProduct(product);
+    }
+
+    @PutMapping("/products/{pid}")
+    public void updateProduct(@RequestBody Product product, @PathVariable("pid") String id) {
+        productService.updateProduct(id, product);
     }
 }

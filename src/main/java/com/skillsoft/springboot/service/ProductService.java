@@ -9,13 +9,7 @@ import java.util.List;
 @Service
 public class ProductService {
 
-    private List<Product> products = Arrays.asList(
-            new Product("P101", "Monitor", "Electronics"),
-            new Product("P102", "Blanket", "Household"),
-            new Product("P103", "Laptop", "Electronics"),
-            new Product("P104", "Shirt", "Fashion"),
-            new Product("P105", "Pens", "School")
-    );
+    private List<Product> products = Arrays.asList(new Product("P101", "Monitor", "Electronics"), new Product("P102", "Blanket", "Household"), new Product("P103", "Laptop", "Electronics"), new Product("P104", "Shirt", "Fashion"), new Product("P105", "Pens", "School"));
 
     public List<Product> getAllProducts() {
         return products;
@@ -28,5 +22,14 @@ public class ProductService {
     public void addProduct(Product product) {
         System.out.println(products.toString());
         products.add(product);
+    }
+
+    public void updateProduct(String id, Product product) {
+        for (int i = 0; i < products.size(); i++) {
+            Product p = products.get(i);
+            if (p.getId().equals(id)) {
+                products.set(i, product);
+            }
+        }
     }
 }
