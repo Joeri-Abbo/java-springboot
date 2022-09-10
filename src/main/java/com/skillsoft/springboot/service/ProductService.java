@@ -1,39 +1,43 @@
 package com.skillsoft.springboot.service;
 
 import com.skillsoft.springboot.model.Product;
+import com.skillsoft.springboot.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
 
-    private List<Product> products = Arrays.asList(new Product("P101", "Monitor", "Electronics"), new Product("P102", "Blanket", "Household"), new Product("P103", "Laptop", "Electronics"), new Product("P104", "Shirt", "Fashion"), new Product("P105", "Pens", "School"));
+    @Autowired
+    private ProductRepository productRepository;
 
     public List<Product> getAllProducts() {
+        List<Product> products = new ArrayList<>();
+
+        productRepository.findAll().forEach(products::add);
+
         return products;
     }
 
-    public Product getProduct(String id) {
-        return products.stream().filter(p -> p.getId().equals(id)).findFirst().get();
+    public Optional<Product> getProduct(Long id) {
+        return productRepository.findById(id);
     }
 
     public void addProduct(Product product) {
-        System.out.println(products.toString());
-        products.add(product);
+        productRepository.save(product);
     }
 
-    public void updateProduct(String id, Product product) {
-        for (int i = 0; i < products.size(); i++) {
-            Product p = products.get(i);
-            if (p.getId().equals(id)) {
-                products.set(i, product);
-            }
+    public void updateProduct(Long id, Product product) {
+        if (productRepository.findById(id).get() != null) {
+            productRepository.save(product);
         }
     }
 
-    public void deleteProduct(String id) {
-        products.removeIf(p -> p.getId().equals(id));
+    public void deleteProduct(Long id) {
+        productRepository.deleteById(id);
     }
 }

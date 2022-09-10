@@ -1,5 +1,6 @@
 package com.skillsoft.springboot.controller;
 
+import com.skillsoft.springboot.exception.ProductNotFoundException;
 import com.skillsoft.springboot.model.Product;
 import com.skillsoft.springboot.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class ProductController {
     }
 
     @GetMapping("/products/{pid}")
-    public Product getProduct(@PathVariable("pid") String id) {
-        return productService.getProduct(id);
+    public Product getProduct(@PathVariable("pid") Long id) {
+        return productService.getProduct(id).orElseThrow(() -> new ProductNotFoundException(id));
     }
 
     @PostMapping("/products")
@@ -28,11 +29,12 @@ public class ProductController {
     }
 
     @PutMapping("/products/{pid}")
-    public void updateProduct(@RequestBody Product product, @PathVariable("pid") String id) {
+    public void updateProduct(@RequestBody Product product, @PathVariable("pid") Long id) {
         productService.updateProduct(id, product);
     }
+
     @DeleteMapping("/products/{pid}")
-    public void deleteProduct(@PathVariable("pid") String id) {
+    public void deleteProduct(@PathVariable("pid") Long id) {
         productService.deleteProduct(id);
     }
 }

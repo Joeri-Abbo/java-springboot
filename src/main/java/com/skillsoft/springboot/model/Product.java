@@ -1,24 +1,32 @@
 package com.skillsoft.springboot.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity(name = "products")
 public class Product {
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String category;
 
     public Product() {
     }
 
-    public Product(String id, String name, String category) {
+    public Product(String name, String category) {
         this.id = id;
         this.name = name;
         this.category = category;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
