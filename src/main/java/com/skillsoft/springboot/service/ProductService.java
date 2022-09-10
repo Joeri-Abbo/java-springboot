@@ -24,4 +24,9 @@ public class ProductService {
     public Product getProduct(String id) {
         return products.stream().filter(p -> p.getId().equals(id)).findFirst().get();
     }
+
+    public void addProduct(Product product) {
+        System.out.println(products.toString());
+        products.add(product);
+    }
 }

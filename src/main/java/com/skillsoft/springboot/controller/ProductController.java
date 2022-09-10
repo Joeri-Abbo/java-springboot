@@ -3,9 +3,7 @@ package com.skillsoft.springboot.controller;
 import com.skillsoft.springboot.model.Product;
 import com.skillsoft.springboot.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +20,13 @@ public class ProductController {
     @GetMapping("/products/{pid}")
     public Product getProduct(@PathVariable("pid") String id) {
         return productService.getProduct(id);
+    }
+
+    @PostMapping("/products")
+    public void addProduct(@RequestBody Product product) {
+        System.out.println(product.getId());
+        System.out.println(product.getName());
+        System.out.println(product.getCategory());
+        productService.addProduct(product);
     }
 }
