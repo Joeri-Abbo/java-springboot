@@ -30,18 +30,21 @@
             Customer Id:
         </label>
         <input type="text" th:field="*{id}"/>
+        <span td:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>
     </div>
     <div>
         <label>
             Name:
         </label>
         <input type="text" th:field="*{name}"/>
+        <span td:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
     </div>
     <div>
         <label>
             Email:
         </label>
         <input type="text" th:field="*{email}"/>
+        <span td:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
     </div>
     <div>
         <label>
@@ -49,6 +52,7 @@
         </label>
         <input type="radio" th:field="*{gender}" value="Male"/>Male
         <input type="radio" th:field="*{gender}" value="Female"/>Female
+        <span td:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
     </div>
     <div>
         <label>
@@ -57,6 +61,7 @@
         <select th:field="*{membership}">
             <option th:each="listItem : ${membershipList}" th:value="${listItem}" th:text="${listItem}"/>
         </select>
+        <span td:if="${#fields.hasErrors('membership')}" th:errors="*{membership}"></span>
     </div>
 
     <div>
@@ -64,6 +69,7 @@
             Request:
         </label>
         <input type="text" th:field="*{content}"/>
+        <span td:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
     </div>
     <br/>
     <p>
