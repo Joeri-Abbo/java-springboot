@@ -1,3 +1,3 @@
-FROM openjdk:21
+FROM openjdk:22
 ENTRYPOINT ["java", "-jar"]
 EXPOSE 8080
